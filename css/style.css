@@ -1,0 +1,216 @@
+/* ============================================================
+   1. RESET Y VARIABLES (Paleta: Azul, Gris y Blanco)
+============================================================ */
+:root {
+  --color-fondo: #f1f5f9;
+  --color-blanco: #10c8e845;
+  --azul-marino: #0f172a;
+  --azul-primario: #0284c7;
+  --azul-hover: #0369a1;
+  --azul-claro: #e0f2fe;
+  --gris-texto: #475569;
+  --gris-suave: #64748b;
+  --gris-borde: #e2e8f0;
+  --sombra-card: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --sombra-hover: 0 20px 25px -5px rgba(2, 132, 199, 0.22), 0 8px 10px -6px rgba(2, 132, 199, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--azul-marino);
+  padding: 50px 20px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   2. SECCIÓN PRINCIPAL Y ANIMACIÓN DE ENTRADA (FADE-IN / SLIDE)
+============================================================ */
+#servicios {
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: slideFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.seccion-encabezado {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.subtitulo {
+  color: var(--azul-primario);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.seccion-encabezado h2 {
+  font-size: 2.2rem;
+  color: var(--azul-marino);
+  margin-bottom: 12px;
+}
+
+.seccion-encabezado p {
+  color: var(--gris-suave);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   3. DISTRIBUCIÓN RESPONSIVA CON CSS GRID (Mobile First)
+============================================================ */
+/* En móviles: una sola columna */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+/* En pantallas medianas (>=768px): dos columnas */
+@media (min-width: 768px) {
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* En pantallas grandes (>=1024px): tres columnas */
+@media (min-width: 1024px) {
+  .servicios-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================
+   4. DISEÑO DE CADA SERVICIO (<article>)
+============================================================ */
+.servicio-card {
+  background-color: var(--color-blanco);
+  border: 1px solid var(--gris-borde);
+  border-radius: 16px;
+  padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--sombra-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Franja superior azul al interactuar */
+.servicio-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--azul-primario);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Ícono / Imagen ilustrativa */
+.img-contenedor {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background-color: var(--azul-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 2px solid #bae6fd;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.img-contenedor img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Título */
+.servicio-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--azul-marino);
+  margin-bottom: 12px;
+}
+
+/* Breve descripción */
+.servicio-card p {
+  font-size: 0.95rem;
+  color: var(--gris-texto);
+  margin-bottom: 25px;
+  flex-grow: 1;
+}
+
+/* Tarifa visible */
+.tarifa-box {
+  width: 100%;
+  padding-top: 18px;
+  border-top: 1px solid var(--gris-borde);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.etiqueta-tarifa {
+  font-size: 0.75rem;
+  color: var(--gris-suave);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.precio {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--azul-primario);
+}
+
+/* ============================================================
+   5. EFECTO HOVER Y TRANSICIÓN SUAVE
+============================================================ */
+.servicio-card:hover {
+  transform: translateY(-8px);
+  border-color: #7dd3fc;
+  box-shadow: var(--sombra-hover);
+}
+
+.servicio-card:hover::before {
+  opacity: 1;
+}
+
+.servicio-card:hover .img-contenedor {
+  transform: scale(1.08);
+  background-color: #bae6fd;
+}
+
+.servicio-card:hover .precio {
+  color: var(--azul-hover);
+}
